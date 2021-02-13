@@ -39,7 +39,7 @@ let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
   element.classList.add('added');
- 
+
   let item = sliders.indexOf(img);
   if (item === -1) {
     sliders.push(img);
@@ -112,12 +112,11 @@ const changeSlide = (index) => {
 // function for Enter Keypress//
 const searchButton = document.getElementById("search-btn");
 searchItem = document.getElementById("search-item")
-    .addEventListener("keypress", function () {
-        if (event.key == 'Enter') {
-          searchBtn.click();
-        }
-    });
-
+  .addEventListener("keypress", function () {
+    if (event.key == 'Enter') {
+      searchBtn.click();
+    }
+  });
 
 searchBtn.addEventListener('click', function () {
   document.querySelector('.main').style.display = 'none';
@@ -126,7 +125,6 @@ searchBtn.addEventListener('click', function () {
   getImages(search.value)
   sliders.length = 0;
 })
-
 
 
 sliderBtn.addEventListener('click', function () {
