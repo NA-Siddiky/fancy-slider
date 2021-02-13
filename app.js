@@ -39,15 +39,24 @@ let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
   element.classList.add('added');
-  // console.log("added");
+  console.log("added");
 
   let item = sliders.indexOf(img);
   if (item === -1) {
     sliders.push(img);
   } else {
     element.classList.remove('added');
-    // console.log("remove");
+    // sliders.pop(img);
 
+    const image = sliders.filter(imges => imges != img)
+    sliders = image;
+
+    console.log(image);
+    console.log(sliders);
+    // const remainingIssues = issues.filter(issue => issue.id != id);
+
+
+    console.log("remove");
     // alert('Hey, Already added !')
   }
 }
