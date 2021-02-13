@@ -39,12 +39,16 @@ let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
   element.classList.add('added');
+  // console.log("added");
 
   let item = sliders.indexOf(img);
   if (item === -1) {
     sliders.push(img);
   } else {
-    alert('Hey, Already added !')
+    element.classList.remove('added');
+    // console.log("remove");
+
+    // alert('Hey, Already added !')
   }
 }
 var timer
@@ -66,15 +70,17 @@ const createSlider = () => {
   sliderContainer.appendChild(prevNext)
   document.querySelector('.main').style.display = 'block';
   // hide image aria
-  imagesArea.style.display = 'none';
+  // imagesArea.style.display = 'none';
   const duration = document.getElementById('duration').value || 2000;
 
-  console.log(duration)
+  // console.log(duration)
 
   if (duration < 0) {
-    alert("Invalid Duration")
+    alert("Given Duration is Invalid")
+
   }
   else {
+    imagesArea.style.display = 'none';
     sliders.forEach(slide => {
       let item = document.createElement('div')
       item.className = "slider-item";
@@ -138,3 +144,13 @@ searchBtn.addEventListener('click', function () {
 sliderBtn.addEventListener('click', function () {
   createSlider()
 })
+
+
+// const toggleImage = (show) => {
+//   const slide = document.getElementById("loading-spinner");
+//   const songs = document.getElementById("song-container");
+//   // console.log(spinner.classList);
+//   spinner.classList.toggle('d-none');
+//   songs.classList.toggle('d-none');
+
+// }
