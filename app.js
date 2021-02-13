@@ -109,13 +109,25 @@ const changeSlide = (index) => {
   items[index].style.display = "block"
 }
 
+// function for Enter Keypress//
+const searchButton = document.getElementById("search-btn");
+searchItem = document.getElementById("search-item")
+    .addEventListener("keypress", function () {
+        if (event.key == 'Enter') {
+          searchBtn.click();
+        }
+    });
+
+
 searchBtn.addEventListener('click', function () {
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
-  const search = document.getElementById('search');
+  const search = document.getElementById('search-item');
   getImages(search.value)
   sliders.length = 0;
 })
+
+
 
 sliderBtn.addEventListener('click', function () {
   createSlider()
