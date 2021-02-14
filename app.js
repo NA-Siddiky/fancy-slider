@@ -4,18 +4,18 @@ const galleryHeader = document.querySelector('.gallery-header');
 const searchBtn = document.getElementById('search-btn');
 const sliderBtn = document.getElementById('create-slider');
 const sliderContainer = document.getElementById('sliders');
-// selected image 
+// selected image //
 let sliders = [];
 
-// using your own api key
+// using your own api key  //
 const KEY = '20273251-9ac2d89fbb364de6c357707d8';
 
-// show images //
+//-------- show images ---------------//
 const showImages = (images) => {
   imagesArea.style.display = 'block';
   if (images.length == 0) {
     galleryHeader.style.display = 'none';
-    gallery.innerHTML = `<h3 class="head-title text-center">Wrong Input!</h3>`;
+    gallery.innerHTML = `<h3 class="head-title text-center">Incorrect Input! Please try again!</h3>`;
   } else {
     gallery.innerHTML = '';
     // show gallery title //
@@ -30,36 +30,30 @@ const showImages = (images) => {
   toggleSpinner();
 }
 
-//call API and get Images //
+//-------------- call API and get Images -----------//
 const getImages = (query) => {
   galleryHeader.style.display = 'none';
-  gallery.innerHTML = `<h3 class="head-title text-center">Please Wait</h3>`;
+  gallery.innerHTML = `<h3 class="head-title text-center">Please Wait...</h3>`;
   fetch(`https://pixabay.com/api/?key=${KEY}&q=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
     .then(data => showImages(data.hits))
     .catch(err => console.log(err))
 }
 
-// function for selecting images for slideshow  //
+//----------- function for selecting images  --------//
 let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
   element.classList.add('added');
   // console.log("added");
-
   let item = sliders.indexOf(img);
   if (item === -1) {
     sliders.push(img);
   } else {
     element.classList.remove('added');
-
-    // using filter for selecting images to play the slideshow //
+    //--------- using filter for selecting images to play at the slideshow -----------//
     const image = sliders.filter(images => images != img)
     sliders = image;
-
-    // console.log(image);
-    // console.log(sliders);
-    // console.log("remove");
     // alert('Hey, Already added !')
   }
 }
@@ -67,12 +61,12 @@ const selectItem = (event, img) => {
 // function for creating slideshow  //
 var timer
 const createSlider = () => {
-  // check slider image length
+  // check slider image length //
   if (sliders.length < 2) {
     alert('Select at least 2 image.')
     return;
   }
-  // crate slider previous next area
+  // crate slider previous next area //
   sliderContainer.innerHTML = '';
   const prevNext = document.createElement('div');
   prevNext.className = "prev-next d-flex w-100 justify-content-between align-items-center";
@@ -85,9 +79,8 @@ const createSlider = () => {
   document.querySelector('.main').style.display = 'block';
   const duration = document.getElementById('duration').value || 1500;
   // console.log(duration)
-
   if (duration < 0) {
-    alert("Duration value can't be a negative number. Please try again.")
+    alert("Slideshow duration value can't be a negative number. Please try again.")
   }
   else {
     imagesArea.style.display = 'none';
@@ -107,12 +100,12 @@ const createSlider = () => {
   }
 }
 
-// change slider index 
+// change slider index //
 const changeItem = index => {
   changeSlide(slideIndex += index);
 }
 
-// change slide item
+// change slide item //
 const changeSlide = (index) => {
   const items = document.querySelectorAll('.slider-item');
   if (index < 0) {
@@ -129,7 +122,7 @@ const changeSlide = (index) => {
   items[index].style.display = "block"
 }
 
-// function for Enter Keypress//
+//---------------- function for Enter Keypress -----------------//
 const searchButton = document.getElementById("search-btn");
 searchItem = document.getElementById("search")
   .addEventListener("keypress", function (event) {
@@ -138,7 +131,7 @@ searchItem = document.getElementById("search")
     }
   });
 
-// function for search button //
+//------------------ function for search button -----------------//
 searchBtn.addEventListener('click', function () {
   if (search.value) {
     toggleSpinner();
@@ -151,7 +144,7 @@ searchBtn.addEventListener('click', function () {
   else {
     alert("Please type something and try again.");
     galleryHeader.style.display = 'none';
-    gallery.innerHTML = `<h3 class="head-title text-center">Invalid Searching. Please type something and try again.</h3>`;
+    gallery.innerHTML = `<h3 class="head-title text-center">Nothing for Searching. Please type something and try again.</h3>`;
   }
 })
 
@@ -159,6 +152,8 @@ sliderBtn.addEventListener('click', function () {
   createSlider();
 })
 
+
+//--------- toggle function  -------------// 
 const toggleSpinner = (show) => {
   const spinner = document.getElementById("loading-spinner");
   spinner.classList.toggle('d-none');
