@@ -36,7 +36,8 @@ img {
   cursor: pointer;
 }
 
-.prev, .next {
+.prev,
+.next {
   background-color: transparent;
   padding: 8px 10px;
   color: #fff;
@@ -55,12 +56,21 @@ img {
   display: none;
 }
 
+.img-item{
+height: 200px;
+}
+
+.img-item img{
+height: 100%;
+width: 100%;
+}
+
 @media (max-width: 767px) {
   .justify-content-around.align-items-center.mt-3.gallery-header.mb-2 {
-    flex-direction: column;
+      flex-direction: column;
   }
   #sliders {
-    height: 300px;
-    width: 90%;
+      height: 300px;
+      width: 90%;
   }
 }
