@@ -141,6 +141,8 @@ searchItem = document.getElementById("search")
 searchBtn.addEventListener('click', function () {
 
   if (search.value) {
+    // const showSliders = document.getElementById('show-sliders')
+    // showSliders.innerHTML = '';
     toggleSpinner();
     document.querySelector('.main').style.display = 'none';
     clearInterval(timer);
@@ -151,7 +153,11 @@ searchBtn.addEventListener('click', function () {
 
   else {
     alert("Please type something and try again.");
-    // console.log("Invalid");
+    const showSliders = document.getElementById('show-sliders')
+    showSliders.innerHTML = 'Invalid Searching. Please type something and try again.'
+    // toggleSpinner();
+    console.log("Invalid");
+    // getImages(search.value)
   }
 })
 
