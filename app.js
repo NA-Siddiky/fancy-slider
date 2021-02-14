@@ -25,6 +25,7 @@ const showImages = (images) => {
     div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
     gallery.appendChild(div)
   })
+  toggleSpinner();
 
 }
 
@@ -84,7 +85,7 @@ const createSlider = () => {
 
   // console.log(duration)
 
-  if (duration < 0) {
+  if (duration < 1) {
     alert("Given Duration is Invalid")
 
   }
@@ -142,6 +143,7 @@ searchItem = document.getElementById("search-item")
   });
 
 searchBtn.addEventListener('click', function () {
+  toggleSpinner();
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
   const search = document.getElementById('search-item');
@@ -163,3 +165,9 @@ sliderBtn.addEventListener('click', function () {
 //   songs.classList.toggle('d-none');
 
 // }
+
+const toggleSpinner = (show) => {
+  const spinner = document.getElementById("loading-spinner");
+  // console.log(spinner.classList);
+  spinner.classList.toggle('d-none');
+}
