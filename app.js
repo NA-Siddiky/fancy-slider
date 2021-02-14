@@ -82,7 +82,7 @@ const createSlider = () => {
   const duration = document.getElementById('duration').value || 2000;
   // console.log(duration)
 
-  if (duration < 1) {
+  if (duration < 0) {
     alert("Given Duration is Invalid")
   }
   else {
@@ -131,7 +131,7 @@ const changeSlide = (index) => {
 
 // function for Enter Keypress//
 const searchButton = document.getElementById("search-btn");
-searchItem = document.getElementById("search-item")
+searchItem = document.getElementById("search")
   .addEventListener("keypress", function () {
     if (event.key == 'Enter') {
       searchBtn.click();
@@ -139,14 +139,21 @@ searchItem = document.getElementById("search-item")
   });
 
 searchBtn.addEventListener('click', function () {
-  toggleSpinner();
-  document.querySelector('.main').style.display = 'none';
-  clearInterval(timer);
-  const search = document.getElementById('search-item');
-  getImages(search.value)
-  sliders.length = 0;
-})
 
+  if (search.value) {
+    toggleSpinner();
+    document.querySelector('.main').style.display = 'none';
+    clearInterval(timer);
+    const search = document.getElementById('search');
+    getImages(search.value)
+    sliders.length = 0;
+  }
+
+  else {
+    alert("Please type something and try again.");
+    // console.log("Invalid");
+  }
+})
 
 sliderBtn.addEventListener('click', function () {
   createSlider()
