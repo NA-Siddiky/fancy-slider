@@ -26,7 +26,6 @@ const showImages = (images) => {
     gallery.appendChild(div)
   })
   toggleSpinner();
-
 }
 
 const getImages = (query) => {
@@ -49,13 +48,12 @@ const selectItem = (event, img) => {
     element.classList.remove('added');
     // sliders.pop(img);
 
-    const image = sliders.filter(imges => imges != img)
+    const image = sliders.filter(images => images != img)
     sliders = image;
 
     console.log(image);
     console.log(sliders);
     // const remainingIssues = issues.filter(issue => issue.id != id);
-
 
     console.log("remove");
     // alert('Hey, Already added !')
@@ -82,12 +80,10 @@ const createSlider = () => {
   // hide image aria
   // imagesArea.style.display = 'none';
   const duration = document.getElementById('duration').value || 2000;
-
   // console.log(duration)
 
   if (duration < 1) {
     alert("Given Duration is Invalid")
-
   }
   else {
     imagesArea.style.display = 'none';
