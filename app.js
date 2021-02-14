@@ -16,19 +16,26 @@ const KEY = '15674931-a9d714b6e9d654524df198e00&q';
 // show images 
 const showImages = (images) => {
   imagesArea.style.display = 'block';
-  gallery.innerHTML = '';
-  // show gallery title
-  galleryHeader.style.display = 'flex';
-  images.forEach(image => {
-    let div = document.createElement('div');
-    div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
-    div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
-    gallery.appendChild(div)
-  })
+  if (images.length == 0) {
+    galleryHeader.style.display = 'none';
+    gallery.innerHTML = `<h3 class="head-title text-center">Wrong Input!</h3>`;
+  } else {
+    gallery.innerHTML = '';
+    // show gallery title
+    galleryHeader.style.display = 'flex';
+    images.forEach(image => {
+      let div = document.createElement('div');
+      div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
+      div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
+      gallery.appendChild(div)
+    })
+  }
   toggleSpinner();
 }
 
 const getImages = (query) => {
+  galleryHeader.style.display = 'none';
+  gallery.innerHTML = `<h3 class="head-title text-center">Please Wait</h3>`;
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
     .then(data => showImages(data.hits))
@@ -132,7 +139,7 @@ const changeSlide = (index) => {
 // function for Enter Keypress//
 const searchButton = document.getElementById("search-btn");
 searchItem = document.getElementById("search")
-  .addEventListener("keypress", function () {
+  .addEventListener("keypress", function (event) {
     if (event.key == 'Enter') {
       searchBtn.click();
     }
@@ -153,16 +160,18 @@ searchBtn.addEventListener('click', function () {
 
   else {
     alert("Please type something and try again.");
-    const showSliders = document.getElementById('show-sliders')
-    showSliders.innerHTML = 'Invalid Searching. Please type something and try again.'
+    // const showSliders = document.getElementById('show-sliders')
+    // showSliders.innerHTML = 'Invalid Searching. Please type something and try again.'
+    galleryHeader.style.display = 'none';
+    gallery.innerHTML = `<h3 class="head-title text-center">Invalid Searching. Please type something and try again.</h3>`;
     // toggleSpinner();
-    console.log("Invalid");
+    // console.log("Invalid");
     // getImages(search.value)
   }
 })
 
 sliderBtn.addEventListener('click', function () {
-  createSlider()
+  createSlider();
 })
 
 
